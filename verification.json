@@ -1,0 +1,32 @@
+{
+  "library": "PLAStochastic",
+  "libraries": [
+    "PLAStochastic"
+  ],
+  "manuscript_globs": [
+    "THEOREMS.md"
+  ],
+  "verification_inputs": [
+    "migration.json",
+    "scripts/check_structure.py",
+    "scripts/theorem_inventory.py",
+    "scripts/verify_package.py",
+    "scripts/lean-locked.sh",
+    "FORMALIZED.md",
+    "README.md"
+  ],
+  "coverage": "All local modules in the PLAStochastic library imported by its root, including every public, private and generated compiled declaration. Structure, import closure, provenance, pinned environment, build, selected public interfaces, exact unconditional P-CEPS signature, full transitive axiom dependencies, and input stability are checked. The eight public result entries cover B-MOM, S-SCALE, S-BRACKET, P-GRE, P-KRE, P-GEP, P-KEP and P-CEPS. In particular P-KEP includes the unconditional general-density exact-denominator additive bound; P-CEPS proves existence and uniqueness of the all-order asymptotic coefficient sequence for the original gepC, and a0 = optimalMeanConstant / optimalDispersionConstant, with no custom analytic premises. The axiom audit accepts only propext, Classical.choice and Quot.sound. Detailed theorem statements are in FORMALIZED.md and the recorded THEOREMS.md.",
+  "not_verified": "This is a package build, interface and axiom audit, not an independent line-by-line mathematical review of all proofs or prose correspondence. P-CEPS identification/evaluation of a1 and a2, convergence of the infinite asymptotic series, effective remainder constants and certified numerical values are outside this acceptance scope. Original-project and earlier snapshot certificates do not automatically extend to this input. No new finite-E mixing result is asserted.",
+  "pre_build_checks": [
+    [
+      "python3",
+      "scripts/check_structure.py"
+    ]
+  ],
+  "post_build_checks": [
+    [
+      "python3",
+      "scripts/theorem_inventory.py"
+    ]
+  ]
+}
