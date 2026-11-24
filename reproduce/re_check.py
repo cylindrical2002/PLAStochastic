@@ -16,8 +16,8 @@ import math
 from pathlib import Path
 import subprocess
 
-KAPPA_OPT = 3.5371705652521226
-ALPHA_OPT = 0.1780964691224734
+KAPPA_OPT = 3.53841980
+ALPHA_OPT = 0.17815941
 RHO_STAR = 0.25710
 THETA_TOP = 3.2  # Median normalized Brownian lifetime threshold for single-segment termination
 

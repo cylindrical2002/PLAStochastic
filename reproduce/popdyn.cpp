@@ -18,8 +18,8 @@
 
 namespace {
 
-constexpr double kKappaOpt = 3.5371705652521226;
-constexpr double kAlphaOpt = 0.1780964691224734;
+constexpr double kKappaOpt = 3.53841980;
+constexpr double kAlphaOpt = 0.17815941;
 constexpr double kCInfCoeff = kKappaOpt / kAlphaOpt;  // ~19.860981
 constexpr double kRhoStar = 0.25710;
 
