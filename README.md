@@ -64,7 +64,7 @@ Detailed mathematical statements, hypotheses, and quantifier orders are document
 
 ## 3. Reproducing the Routing & Numerical Evaluation (`reproduce/`)
 
-The [`reproduce/`](reproduce/) directory provides standalone C++17 and Python 3 implementations of exact O'Rourke shrinking-cone segmentation (`ALG-OPT`), Endpoint Promotion (`EP`), Rank-Equispaced Promotion (`RE`), Compressed Sparse Row (CSR) boundary-crossing bucket routing (Section 5.1, Lemma 5.1 & Theorem 5.2), population-dynamics fanout/variance tracking (Figures 2 & 4), two-phase curvature scans (Figures 3 & 4), and finite-parameter height prediction recurrences (Table 3):
+The [`reproduce/`](reproduce/) directory provides standalone C++17 and Python 3 implementations of exact O'Rourke shrinking-cone segmentation (`ALG-OPT`), one-pass streaming fitters (`Anchored`, `ShrinkingCone`, `GreedySplineCorridor`, `Native Swing`), Endpoint Promotion (`EP`), Rank-Equispaced Promotion (`RE`), Compressed Sparse Row (CSR) boundary-crossing bucket routing (Section 5.1, Lemma 5.1 & Theorem 5.2), population-dynamics fanout/variance tracking (Figures 3 & 5), two-phase curvature scans (Figures 4 & 5), finite-parameter height prediction recurrences (Table 4), and 200M-key SOSD real-world benchmarks (Table 5):
 
 ```bash
 # 1. Exact rational verification of CSR bucket routing and Lemma 5.1 (< 5s, pure Python 3)
@@ -75,16 +75,23 @@ g++ -O3 -std=c++17 reproduce/popdyn.cpp -o reproduce/popdyn
 
 # 3. Finite-step height recurrence accuracy check (re_check.py)
 python3 reproduce/re_check.py --quick   # Fast grid up to n = 10^6 (~5s)
-python3 reproduce/re_check.py --full    # Full paper grid up to n = 10^8 (Table 3)
+python3 reproduce/re_check.py --full    # Full paper grid up to n = 10^8 (Table 4)
 
 # 4. Multi-layer variance collapse, finite-eps fanout, and curvature scan
-./reproduce/popdyn variance             # Reproduces Figure 2(b) relative variance trajectories
-./reproduce/popdyn fanout               # Reproduces Figure 4(a) stationary EP ratio vs (1 + rho_*/eps)^2
-./reproduce/popdyn trajectory           # Reproduces Figure 4(b) n = 10^8 layer contraction
-./reproduce/popdyn delta-scan           # Reproduces Figures 3(b) & 4(c) curvature phase transition
+./reproduce/popdyn variance             # Reproduces Figure 3(b) relative variance trajectories
+./reproduce/popdyn fanout               # Reproduces Figure 5(a) stationary EP ratio vs (1 + rho_*/eps)^2
+./reproduce/popdyn trajectory           # Reproduces Figure 5(b) n = 10^8 layer contraction
+./reproduce/popdyn delta-scan           # Reproduces Figures 4(b) & 5(c) curvature phase transition
+
+# 5. Single-layer fitter spectrum & 200M-key SOSD real-world benchmark suite (Table 5)
+g++ -O3 -march=native -std=c++17 reproduce/sosd_bench.cpp -o reproduce/sosd_bench
+./reproduce/sosd_bench synthetic-fitters   # Optimal, Anchored, ShrinkingCone, RadixSpline, Native Swing
+./reproduce/sosd_bench swing-gaussian      # Gaussian-walk three-regime & alternating Swing brackets
+python3 reproduce/download_sosd.py         # Downloads & MD5-verifies books, fb, osm, wiki (200M uint64)
+./reproduce/sosd_bench sosd                # Full EP-PGM vs RE-PGM vs Flat Bins & fitters on SOSD 200M
 ```
 
-Reference CSV tables corresponding to the paper's figures are also included under [`reproduce/data/`](reproduce/data/).
+Reference CSV tables corresponding to the paper's figures and SOSD / fitter evaluations are included under [`reproduce/data/`](reproduce/data/).
 
 ---
 

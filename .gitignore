@@ -4,3 +4,5 @@
 __pycache__/
 *.pyc
 reproduce/popdyn
+reproduce/sosd_bench
+reproduce/sosd_data/
